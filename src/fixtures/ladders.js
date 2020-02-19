@@ -9,7 +9,8 @@ const problems1 = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: {stack: true, string: true},
-    createdAt: moment(0)
+    createdAt: moment(0),
+    star: 8
   },
   {
     id: uuid(),
@@ -18,7 +19,8 @@ const problems1 = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: {stack: true , tree: true, array: true},
-    createdAt: moment(0).add(1, 'day')
+    createdAt: moment(0).add(1, 'day'),
+    star: 3
   },
   {
     id: uuid(),
@@ -27,7 +29,8 @@ const problems1 = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: {string: true , array: true},
-    createdAt: moment(0).subtract(3, 'days')
+    createdAt: moment(0).subtract(3, 'days'),
+    star: 7
   }
 ];
 
@@ -39,7 +42,8 @@ const problems2 = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: {stack: true, string: true},
-    createdAt: moment(0).add(1, 'year')
+    createdAt: moment(0).add(1, 'year'),
+    star: 2
   },
   {
     id: uuid(),
@@ -48,7 +52,8 @@ const problems2 = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: {stack: true , tree: true, array: true},
-    createdAt: moment(0).add(2, 'year')
+    createdAt: moment(0).add(2, 'year'),
+    star: 4
   },
   {
     id: uuid(),
@@ -57,7 +62,8 @@ const problems2 = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: {string: true , array: true},
-    createdAt: moment(0).subtract(4, 'year')
+    createdAt: moment(0).subtract(4, 'year'),
+    star: 0
   }
 ];
 
@@ -69,7 +75,8 @@ export const problems = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: {stack: true, string: true},
-    createdAt: moment(0)
+    createdAt: moment(0),
+    star: 5
   },
   {
     id: uuid(),
@@ -78,7 +85,8 @@ export const problems = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: {stack: true , tree: true, array: true},
-    createdAt: moment(0).add(1, 'day')
+    createdAt: moment(0).add(1, 'day'),
+    star: 7
   },
   {
     id: uuid(),
@@ -87,7 +95,8 @@ export const problems = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: {string: true , array: true},
-    createdAt: moment(0).subtract(3, 'days')
+    createdAt: moment(0).subtract(3, 'days'),
+    star: 3
   }
 ];
 
@@ -98,6 +107,7 @@ export const ladders = [
     description: 'this is first ladder',
     createdAt: moment(0),
     problems: [...problems1],
+    star: 6
   },
   {
     id: uuid(),
@@ -105,6 +115,7 @@ export const ladders = [
     description: 'this is description about the second ladder',
     createdAt: moment(0).add(1, 'minute'),
     problems: [...problems2 ],
+    star: 3
   }
 ];
 
@@ -116,7 +127,8 @@ const altProblem = [{
   judge: '',
   difficultyLevel: 0,
   tags: {},
-  createdAt: undefined
+  createdAt: undefined,
+  star: 7
 }];
 export const altLadders = [
   {
@@ -125,5 +137,6 @@ export const altLadders = [
     description: '',
     createdAt: undefined,
     problems: [...problems1],
+    star: 8
   }
 ];

@@ -31,17 +31,13 @@ export const removeProblemTagFilter = (
 });
 
 // SET_START_DATE
-export const setStartDate = (
-  { startDate = 0 } = {}
-)=>({
+export const setStartDate = (startDate)=>({
   type: 'SET_START_DATE',
   startDate
 });
 
 // SET_END_DATE
-export const setEndDate = (
-  { endDate = 0 } = {}
-)=>({
+export const setEndDate = (endDate)=>({
   type: 'SET_END_DATE',
   endDate
 });
@@ -54,5 +50,10 @@ export const sortByDate = ()=>({
 // SORT_BY_PROBLEM_DIFFICULTY_LEVEL
 export const sortByProblemDifficultyLevel = ()=>({
   type: 'SORT_BY_PROBLEM_DIFFICULTY_LEVEL'
+});
+
+// SORT_BY_STARS
+export const sortByStar = ()=>({
+  type: 'SORT_BY_STAR'
 });
 

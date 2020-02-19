@@ -16,8 +16,12 @@ const getVisibleProblems = (problems, { text, judge, tags, sortBy, startDate, en
   }).sort((a,b)=>{
     if(sortBy === 'date'){
       return a.createdAt < b.createdAt ? 1 : -1;
-    }if(sortBy === 'problemDifficultyLevel'){
+    }
+    if(sortBy === 'problemDifficultyLevel'){
       return a.difficultyLevel > b.difficultyLevel ? 1 : -1;
+    }
+    if(sortBy === 'star'){
+      return a.star < b.star ? 1 : -1;
     }
   });
 };

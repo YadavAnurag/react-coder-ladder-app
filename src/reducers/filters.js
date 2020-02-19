@@ -1,12 +1,13 @@
+import moment from "moment";
 
 // filter reducer
 const filterRecuerDefaultState = {
   text: '',
   judge: '',
-  tags: {},
-  sortBy: '',
-  startDate: '',
-  endDate: ''
+  tags: {first: true, second: true},
+  sortBy: 'star',
+  startDate: null,
+  endDate: null
 };
 const filterReducer = (state = filterRecuerDefaultState, action)=>{
   switch(action.type){
@@ -30,6 +31,8 @@ const filterReducer = (state = filterRecuerDefaultState, action)=>{
       return {...state, sortBy: 'date'};
     case 'SORT_BY_PROBLEM_DIFFICULTY_LEVEL':
       return {...state, sortBy: 'problemDifficultyLevel'};
+    case 'SORT_BY_STAR':
+      return {...state, sortBy: 'star'};
     default: 
       return state;
   }

@@ -48,6 +48,53 @@ const ladderReducer = (state = ladderReducerDefaultState, action)=>{
           return ladder;
         }
       });
+    case 'INCREASE_LADDER_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          return { ...ladder, star: ladder['star'] + 1};
+        }else{
+          return ladder;
+        }
+      });
+    case 'DECREASE_LADDER_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          return { ...ladder, star: ladder['star'] - 1};
+        }else{
+          return ladder;
+        }
+      });
+    case 'INCREASE_PROBLEM_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          const updatedProblems = ladder.problems.map((problem)=>{
+            if(problem.id === action.problemId){
+              return {...problem, star: problem['star'] + 1};
+            }else{
+              return problem;
+            }
+          });
+          return {...ladder, problems: updatedProblems};
+        }else{
+          return ladder;
+        }
+      });
+    case 'DECREASE_PROBLEM_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          const updatedProblems = ladder.problems.map((problem)=>{
+            if(problem.id === action.problemId){
+              console.log('calling');
+              return {...problem, star: problem['star'] - 1};
+            }else{
+              return problem;
+            }
+          });
+          return {...ladder, problems: updatedProblems};
+        }else{
+          return ladder;
+        }
+      });
     default: 
       return state;
   }

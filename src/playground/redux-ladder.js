@@ -2,7 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import uuid from 'uuid';
 import { ladders, altLadders, problems } from '../fixtures/ladders';
 import { filters, altFilters } from '../fixtures/filters';
-console.log(ladders, altLadders, filters, altFilters); 
+//console.log(ladders, altLadders, filters, altFilters); 
 
 // const ladders = [{
 //   id: '05b1',
@@ -33,7 +33,8 @@ const addLadder = (
     ladderName = '',
     description = '',
     problems = [],
-    createdAt = 0
+    createdAt = 0,
+    star = 0
   } = {}
 )=>({
   type: 'ADD_LADDER',
@@ -42,7 +43,8 @@ const addLadder = (
     ladderName,
     description,
     problems,
-    createdAt
+    createdAt,
+    star
   }
 });
 
@@ -67,7 +69,8 @@ const addProblem = (ladderId, {
   judge = '',
   difficultyLevel = 0,
   tags = [],
-  createdAt = 0
+  createdAt = 0,
+  star = 0
 })=>({
   type: 'ADD_PROBLEM',
   ladderId,
@@ -78,7 +81,8 @@ const addProblem = (ladderId, {
     judge,
     difficultyLevel,
     tags,
-    createdAt
+    createdAt,
+    star
   }
 });
 
@@ -105,6 +109,54 @@ const editProblem = (
   ladderId,
   problemId,
   updates
+});
+
+// todo increaseLadderStar
+// INCREASE_LADDER_STAR
+const increaseLadderStar = (
+  {
+    ladderId = ''
+  } = {}
+)=>({
+  type: 'INCREASE_LADDER_STAR',
+  ladderId
+});
+
+// todo decreaseLadderStar
+// DECREASE_LADDER_STAR
+const decreaseLadderStar = (
+  {
+    ladderId = ''
+  } = {}
+)=>({
+  type: 'DECREASE_LADDER_STAR',
+  ladderId
+});
+
+// todo increaseProblemStar
+// INCREASE_PROBLEM_STAR
+const increaseProblemStar = (
+  {
+    ladderId = '',
+    problemId = ''
+  } = {}
+)=>({
+  type: 'INCREASE_PROBLEM_STAR',
+  ladderId,
+  problemId
+});
+
+// todo decreaseProblemStar
+// DECREASE_PROBLEM_STAR
+const decreaseProblemStar = (
+  {
+    ladderId = '',
+    problemId = ''
+  } = {}
+)=>({
+  type: 'DECREASE_PROBLEM_STAR',
+  ladderId,
+  problemId
 });
 
 
@@ -162,6 +214,10 @@ const sortByProblemDifficultyLevel = ()=>({
   type: 'SORT_BY_PROBLEM_DIFFICULTY_LEVEL'
 });
 
+// SORT_BY_STARS
+const sortByStar = ()=>({
+  type: 'SORT_BY_STAR'
+});
 
 const ladderReducerDefaultState = [];
 const ladderReducer = (state = ladderReducerDefaultState, action)=>{
@@ -211,6 +267,54 @@ const ladderReducer = (state = ladderReducerDefaultState, action)=>{
           return ladder;
         }
       });
+    case 'INCREASE_LADDER_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          return { ...ladder, star: ladder['star'] + 1};
+        }else{
+          return ladder;
+        }
+      });
+    // todo
+    case 'DECREASE_LADDER_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          return { ...ladder, star: ladder['star'] - 1};
+        }else{
+          return ladder;
+        }
+      });
+    case 'INCREASE_PROBLEM_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          const updatedProblems = ladder.problems.map((problem)=>{
+            if(problem.id === action.problemId){
+              return {...problem, star: problem['star'] + 1};
+            }else{
+              return problem;
+            }
+          });
+          return {...ladder, problems: updatedProblems};
+        }else{
+          return ladder;
+        }
+      });
+    case 'DECREASE_PROBLEM_STAR':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          const updatedProblems = ladder.problems.map((problem)=>{
+            if(problem.id === action.problemId){
+              console.log('calling');
+              return {...problem, star: problem['star'] - 1};
+            }else{
+              return problem;
+            }
+          });
+          return {...ladder, problems: updatedProblems};
+        }else{
+          return ladder;
+        }
+      });
     default: 
       return state;
   }
@@ -246,6 +350,8 @@ const filterReducer = (state = filterRecuerDefaultState, action)=>{
       return {...state, sortBy: 'date'};
     case 'SORT_BY_PROBLEM_DIFFICULTY_LEVEL':
       return {...state, sortBy: 'problemDifficultyLevel'};
+    case 'SORT_BY_STAR':
+      return {...state, sortBy: 'star'};
     default: 
       return state;
   }
@@ -261,6 +367,9 @@ const getVisibleLadders = (ladders, { text, sortBy, startDate, endDate })=>{
   }).sort((a,b)=>{
     if(sortBy === 'date'){
       return a.createdAt < b.createdAt ? 1 : -1;
+    }
+    if(sortBy === 'star'){
+      return a.star < b.star ? 1 : -1;
     }
   });
 };
@@ -284,16 +393,20 @@ const getVisibleProblems = (problems, { text, judge, tags, sortBy, startDate, en
   }).sort((a,b)=>{
     if(sortBy === 'date'){
       return a.createdAt < b.createdAt ? 1 : -1;
-    }if(sortBy === 'problemDifficultyLevel'){
+    }
+    if(sortBy === 'problemDifficultyLevel'){
       return a.difficultyLevel > b.difficultyLevel ? 1 : -1;
+    }
+    if(sortBy === 'star'){
+      return a.star < b.star ? 1 : -1;
     }
   });
 };
-const newFilters = {text: '', judge: '', tags: {stack: true, tree: true, queue: true}, sortBy: 'date', startDate: undefined, endDate: undefined};
+// const newFilters = {text: '', judge: '', tags: {stack: true, tree: true, queue: true}, sortBy: 'star', startDate: undefined, endDate: undefined};
 //const newFilters = filters;
-const newProblems = problems;
-const result = getVisibleProblems(newProblems, newFilters);
-console.log('result', result);
+// const newProblems = problems;
+// const result = getVisibleProblems(newProblems, newFilters);
+// console.log('result', result);
 
 
 
@@ -311,25 +424,33 @@ const unsubscribe = store.subscribe(()=>{
   const visibleLadders = getVisibleLadders(state.ladders, state.filters);
   console.log(visibleLadders, state.filters);
 });
-const firstLadder = store.dispatch(addLadder({ ladderName: 'first ladder', description: 'some description', createdAt: 2000 }));
-const secondLadder = store.dispatch(addLadder({ ladderName: 'my ladder', createdAt: 1000 }));
-store.dispatch(addProblem(secondLadder.ladder.id, {problemName: 'first', tags: ['array', 'queue', 'graph']}));
-const secondUpdatedLadder = store.dispatch(addProblem(secondLadder.ladder.id, {problemName: 'second', tags: ['stack', 'tree']}));
-store.dispatch(removeProblem({ladderId: secondUpdatedLadder.ladderId, problemId: secondUpdatedLadder.problem.id}));
-const args = {ladderId: secondUpdatedLadder.ladderId, problemId: secondUpdatedLadder.problem.id, updates: {problemName: 'new name'}};
-store.dispatch(editProblem(args));
-store.dispatch(setTextFilter({ text: 'ladder' }));
-store.dispatch(setJudgeTextFilter({ judge: 'hackerrank' }));
-store.dispatch(setStartDate({ startDate: 1000}));
-store.dispatch(setEndDate({ endDate: -1000}));
-store.dispatch(addProblemTagFilter({ tag: 'stack'}));
-store.dispatch(addProblemTagFilter({ tag: 'stack'}));
-store.dispatch(addProblemTagFilter({ tag: 'array'}));
-store.dispatch(removeProblemTagFilter({ tag: 'stack'}));
-store.dispatch(removeProblemTagFilter({ tag: 'array'}));
-store.dispatch(sortByDate());
-store.dispatch(sortByProblemDifficultyLevel());
+// const firstLadder = store.dispatch(addLadder({ ladderName: 'first ladder', description: 'some description', createdAt: 2000, star: 20 }));
+//const secondLadder = store.dispatch(addLadder({ ladderName: 'my ladder', createdAt: 1000, star: 11 }));
+//const secondUpdatedLadder = store.dispatch(addProblem(secondLadder.ladder.id, {problemName: 'first', star: 7 }));
+// const secondUpdatedLadder = store.dispatch(addProblem(secondLadder.ladder.id, {problemName: 'second', tags: ['stack', 'tree']}));
+// store.dispatch(removeProblem({ladderId: secondUpdatedLadder.ladderId, problemId: secondUpdatedLadder.problem.id}));
+// const args = {ladderId: secondUpdatedLadder.ladderId, problemId: secondUpdatedLadder.problem.id, updates: {problemName: 'new name'}};
+// console.log(argsForStar);
+// store.dispatch(editProblem(args));
 
+// store.dispatch(increaseLadderStar({ ladderId: firstLadder.ladder.id }));
+// store.dispatch(decreaseLadderStar({ ladderId: secondLadder.ladder.id }));
+// const argsForStar = {ladderId: secondLadder.ladder.id, problemId: secondUpdatedLadder.problem.id};
+// store.dispatch(increaseProblemStar(argsForStar));
+// store.dispatch(decreaseProblemStar(argsForStar));
+
+// store.dispatch(setTextFilter({ text: 'ladder' }));
+// store.dispatch(setJudgeTextFilter({ judge: 'hackerrank' }));
+// store.dispatch(setStartDate({ startDate: 1000}));
+// store.dispatch(setEndDate({ endDate: -1000}));
+// store.dispatch(addProblemTagFilter({ tag: 'stack'}));
+// store.dispatch(addProblemTagFilter({ tag: 'stack'}));
+// store.dispatch(addProblemTagFilter({ tag: 'array'}));
+// store.dispatch(removeProblemTagFilter({ tag: 'stack'}));
+// store.dispatch(removeProblemTagFilter({ tag: 'array'}));
+// store.dispatch(sortByDate());
+// store.dispatch(sortByProblemDifficultyLevel());
+store.dispatch(sortByStar());
 
 // const arr = [1,2,3];
 // const foo = arr.some((a)=>a===4);

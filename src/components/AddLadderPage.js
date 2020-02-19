@@ -1,9 +1,26 @@
 import React from 'react';
+import { addLadder } from '../actions/ladders';
+import { connect } from 'react-redux';
+import LadderForm from './LadderForm';
 
-const AddLadderPage = ()=>(
-  <div>
-    <h2>AddLadderPage</h2>
-  </div>
-);
+class AddLadderPage extends React.Component{
 
-export default AddLadderPage;
+  onSubmit = (ladder)=>{
+    this.props.addLadder(ladder);
+    this.props.history.push('/ladders');
+  }
+
+  render(){
+    return (
+      <div>
+        <h2>AddLadderPage</h2>
+        <LadderForm onSubmit={this.onSubmit} />
+      </div>
+    );
+  };
+}
+
+const mapDispatchToProps = (dispatch)=>({
+  addLadder: (ladder)=> dispatch(addLadder(ladder))
+})
+export default connect(undefined, mapDispatchToProps)(AddLadderPage);
