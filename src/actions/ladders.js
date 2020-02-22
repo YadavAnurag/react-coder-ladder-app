@@ -21,6 +21,27 @@ export const addLadder = (
     star
   }
 });
+// todo delete fake add ladder
+export const addFakeLadder = (
+  {
+    id = '',
+    ladderName = '',
+    description = '',
+    problems = [],
+    createdAt = moment(),
+    star = 0
+  } = {}
+)=>({
+  type: 'ADD_LADDER',
+  ladder: {
+    id,
+    ladderName,
+    description,
+    problems,
+    createdAt,
+    star
+  }
+});
 
 // REMOVE_LADDER
 export const removeLadder = (
@@ -72,6 +93,31 @@ export const addProblem = (ladderId, {
   ladderId,
   problem: {
     id: uuid(),
+    problemName,
+    problemUrl,
+    judge,
+    difficultyLevel,
+    tags,
+    createdAt,
+    star
+  }
+});
+
+// todo delete add fake problem
+export const addFakeProblem = (ladderId, {
+  id = '',
+  problemName = '',
+  problemUrl = '',
+  judge = '',
+  difficultyLevel = 0,
+  tags = [],
+  createdAt = moment(),
+  star = 0
+})=>({
+  type: 'ADD_PROBLEM',
+  ladderId,
+  problem: {
+    id,
     problemName,
     problemUrl,
     judge,

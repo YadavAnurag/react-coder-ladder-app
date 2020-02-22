@@ -8,7 +8,7 @@ class AddLadderPage extends React.Component{
   onSubmit = (ladder)=>{
     this.props.addLadder(ladder);
     this.props.history.push('/ladders');
-  }
+  };
 
   render(){
     return (

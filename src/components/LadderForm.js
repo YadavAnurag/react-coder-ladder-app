@@ -4,14 +4,18 @@ import moment from 'moment';
 
 class LadderForm extends React.Component{
 
-  state = {
-    ladderName: '',
-    description: '',
-    createdAt: moment(),
-    problems: [],
-    calanderFocused: false,
-    error: ''
-  };
+  constructor(props){
+    super(props);
+
+    this.state = {
+      ladderName: props.ladder ? props.ladder.ladderName : '',
+      description: props.ladder ? props.ladder.description : '',
+      createdAt: props.ladder ? props.ladder.createdAt : moment(),
+      problems: props.ladder ? props.ladder.problems : [],
+      calanderFocused: false,
+      error: ''
+    };
+  }
 
   onLadderNameChange = (e)=>{
     this.setState({ ladderName: e.target.value });

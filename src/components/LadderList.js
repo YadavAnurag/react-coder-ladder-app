@@ -7,7 +7,7 @@ const LadderList = (props)=>(
   <div>
     {
       props.ladders.length === 0 ? (
-        <p>No ladders</p>
+        <p>No ladders goes here</p>
       ) : (
         props.ladders.map(ladder=> (
           <LadderListItem key={ladder.id} {...ladder} />

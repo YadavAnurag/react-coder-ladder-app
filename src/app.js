@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
-import { addLadder } from './actions/ladders';
+import { addFakeLadder } from './actions/ladders';
 import configureStore from './store/configureStore';
 import { ladders } from './fixtures/ladders'; 
 import 'normalize.css/normalize.css';
@@ -16,7 +16,7 @@ const store = configureStore();
 // });
 
 // adding fixtures
-ladders.map(ladder=> store.dispatch(addLadder(ladder)));
+ladders.map(ladder=> store.dispatch(addFakeLadder(ladder)));
 
 
 const jsx = (

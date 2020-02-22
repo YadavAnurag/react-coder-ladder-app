@@ -5,6 +5,9 @@ const ladderReducer = (state = ladderReducerDefaultState, action)=>{
   switch(action.type){
     case 'ADD_LADDER':
       return [...state, action.ladder];
+    // todo delete fake add ladder
+    case 'FAKE_ADD_LADDER':
+      return [...state, action.ladder];
     case 'REMOVE_LADDER':
       return state.filter(({ id })=>(id !== action.id));
     case 'EDIT_LADDER':
@@ -16,6 +19,16 @@ const ladderReducer = (state = ladderReducerDefaultState, action)=>{
         }
       });
     case 'ADD_PROBLEM':
+      return state.map((ladder)=>{
+        if(ladder.id === action.ladderId){
+          const problems = ladder.problems.concat(action.problem);
+          return {...ladder, problems: problems};
+        }else{
+          return ladder;
+        }
+      });
+    // todo delete fake add problem
+    case 'FAKE_ADD_PROBLEM':
       return state.map((ladder)=>{
         if(ladder.id === action.ladderId){
           const problems = ladder.problems.concat(action.problem);

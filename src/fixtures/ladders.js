@@ -3,32 +3,32 @@ import uuid from 'uuid';
 
 const problems1 = [
   {
-    id: uuid(),
+    id: '1',
     problemName: 'first',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codechef',
     difficultyLevel: 2,
-    tags: {stack: true, string: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0),
     star: 8
   },
   {
-    id: uuid(),
+    id: '2',
     problemName: 'second',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 3,
-    tags: {stack: true , tree: true, array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).add(1, 'day'),
     star: 3
   },
   {
-    id: uuid(),
+    id: '3',
     problemName: 'third',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 1,
-    tags: {string: true , array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).subtract(3, 'days'),
     star: 7
   }
@@ -36,32 +36,32 @@ const problems1 = [
 
 const problems2 = [
   {
-    id: uuid(),
+    id: '4',
     problemName: 'first2',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codechef',
     difficultyLevel: 2,
-    tags: {stack: true, string: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).add(1, 'year'),
     star: 2
   },
   {
-    id: uuid(),
+    id: '5',
     problemName: 'second2',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 3,
-    tags: {stack: true , tree: true, array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).add(2, 'year'),
     star: 4
   },
   {
-    id: uuid(),
+    id: '6',
     problemName: 'third2',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 1,
-    tags: {string: true , array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).subtract(4, 'year'),
     star: 0
   }
@@ -69,32 +69,32 @@ const problems2 = [
 
 export const problems = [
   {
-    id: uuid(),
+    id: '7',
     problemName: 'first',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codechef',
     difficultyLevel: 2,
-    tags: {stack: true, string: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0),
     star: 5
   },
   {
-    id: uuid(),
+    id: '9',
     problemName: 'second',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 3,
-    tags: {stack: true , tree: true, array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).add(1, 'day'),
     star: 7
   },
   {
-    id: uuid(),
+    id: '10',
     problemName: 'third',
     problemUrl: 'http://codeforces.com/problemset/problem/263/A',
     judge: 'codeforces',
     difficultyLevel: 1,
-    tags: {string: true , array: true},
+    tags: ['stack', 'tree', 'array'],
     createdAt: moment(0).subtract(3, 'days'),
     star: 3
   }
@@ -102,7 +102,7 @@ export const problems = [
 
 export const ladders = [
   {
-    id: uuid(),
+    id: '11',
     ladderName: 'first ladder',
     description: 'this is first ladder',
     createdAt: moment(0),
@@ -110,7 +110,7 @@ export const ladders = [
     star: 6
   },
   {
-    id: uuid(),
+    id: '12',
     ladderName: 'my second ladder',
     description: 'this is description about the second ladder',
     createdAt: moment(0).add(1, 'minute'),
@@ -121,18 +121,18 @@ export const ladders = [
 
 
 const altProblem = [{
-  id: uuid(),
+  id: '13',
   problemName: '',
   problemUrl: '',
   judge: '',
   difficultyLevel: 0,
-  tags: {},
+  tags: [],
   createdAt: undefined,
   star: 7
 }];
 export const altLadders = [
   {
-    id: uuid(),
+    id: '14',
     ladderName: '',
     description: '',
     createdAt: undefined,
