@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeLadder } from '../actions/ladders';
+import moment from 'moment';
 
 class LadderListItem extends React.Component{
 
@@ -21,7 +22,7 @@ class LadderListItem extends React.Component{
         <Link to={`/ladders/edit/${this.props.id}`}>Edit Ladder</Link>
         <button onClick={()=> this.onDelete(this.props.id)}>Delete</button>
         <p>{this.props.description}</p>
-        <p>{this.props.problems.length}-{this.props.createdAt.format('MMM Do YYYY')}</p>
+        <p>{this.props.problems.length}-{moment(this.props.createdAt).format('MMM Do YYYY')}</p>
       </div>
     )
   }

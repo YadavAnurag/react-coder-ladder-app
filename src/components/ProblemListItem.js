@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { removeProblem } from '../actions/ladders';
 
 
@@ -22,7 +23,7 @@ class ProblemListItem extends React.Component{
         <Link to={`/ladders/edit/${this.ladderId}/problem/edit/${this.problemId}`}>Edit</Link>
         <button onClick={this.onDelete}>Delete</button>
         <p>{this.props.judge}-{this.props.difficultyLevel}</p>
-        <p>{this.props.createdAt.format('MMM Do, YYYY')}-{this.props.star}-{this.props.tags.join(', ')}</p>
+        <p>{moment(this.props.createdAt).format('MMM Do YYYY')}-{this.props.star}-{this.props.tags.join(', ')}</p>
       </div>
     );
   };

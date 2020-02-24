@@ -4,7 +4,7 @@ import moment from "moment";
 const filterRecuerDefaultState = {
   text: '',
   judge: '',
-  tags: {first: true, second: true},
+  tags: {},
   sortBy: 'star',
   startDate: null,
   endDate: null

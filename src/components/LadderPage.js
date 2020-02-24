@@ -1,8 +1,10 @@
 import React from 'react';
-import LadderListItem from './LadderListItem';
 import { connect } from 'react-redux';
-import ProblemList from './ProblemList';
+import getSelectedProblems from '../selectors/problems';
+import LadderListItem from './LadderListItem';
 import { Link } from 'react-router-dom';
+import ProblemList from './ProblemList';
+import ProblemListFilters from '../components/ProblemListFilters';
 
 const LadderPage = (props)=>(
   <div>
@@ -14,16 +16,21 @@ const LadderPage = (props)=>(
         <div>
           <LadderListItem {...props.ladder} match={props.match} history={props.history} />
           <Link to={`${props.ladder.id}/problem/create`}>Add Problems</Link>
-          <ProblemList problems={props.ladder.problems} match={props.match} history={props.history} />
+          <ProblemListFilters />
+          <ProblemList problems={props.problems} match={props.match} history={props.history} />
         </div>
       )
     }
   </div>
 );
 
-const mapStateToProps = (state, props)=>({
-  ladder: state.ladders.find(({ id })=> (id === props.match.params.id))
-});
+const mapStateToProps = (state, props)=>{
+  const ladder = state.ladders.find(({ id })=> (id === props.match.params.id));
+  return {
+    ladder,
+    problems: getSelectedProblems(ladder.problems, state.filters)
+  }
+};
 export default connect(mapStateToProps)(LadderPage);
 
 // {

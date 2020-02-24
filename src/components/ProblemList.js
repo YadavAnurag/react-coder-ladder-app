@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import selectedProblems from '../selectors/ladders';
 import ProblemListItem from './ProblemListItem';
 
 
@@ -19,4 +21,7 @@ const ProblemList = (props)=>{
   );
 }
 
+const mapStateToProps = (state)=> ({
+  problems: selectedProblems(state.problems, state.filters)
+});
 export default ProblemList;

@@ -7,13 +7,12 @@ class ProblemForm extends React.Component{
 
   constructor(props){
     super(props);
-
     this.state = {
-      problemName: '',
-      problemUrl: '',
-      judge: '',
-      difficultyLevel: 1,
-      tag: '',
+      problemName: this.props.problemName ? this.props.problemName : '',
+      problemUrl: this.props.problemUrl ? this.props.problemUrl : '',
+      judge: this.props.judge ? this.props.judge : '',
+      difficultyLevel: this.props.difficultyLevel ? this.props.difficultyLevel : 2,
+      tags: this.props.tags ? this.props.tags.join(', ') : '',
       error: ''
     };
   };
@@ -58,30 +57,31 @@ class ProblemForm extends React.Component{
   };
 
   onTagChange = (e)=>{
-    let tags = e.target.value.split(',');
-    tags = tags.map(tag => tag.trim());
-    this.setState({ tag: tags });
+    this.setState({ tags: e.target.value });
   };
 
   onSubmit = (e)=>{
     e.preventDefault();
-    if(
-      !this.state.problemName ||
-      !this.state.problemUrl ||
-      !this.state.judge ||
-      !this.state.tag
-    ){
-      this.setState({ error: 'Please enter problem name, url, judge and tag'});
+    if( !this.state.problemName || !this.state.problemUrl ||
+      !this.state.judge || !this.state.tags){
+      this.setState({ error: 'Please enter problem name, url, judge and tags'});
     }else{
-      console.log(this.state);
       this.setState({ error: '' });
+      
+      const updatedTags = [];
+      this.state.tags.split(',').map(tag => {
+        if(tag.trim()){ updatedTags.push(tag.trim()) };
+      });
+
+      const createdAt = this.props.createdAt ? this.props.createdAt : moment();
+
       this.props.onSubmit({
         problemName: this.state.problemName,
         problemUrl: this.state.problemUrl,
         judge: this.state.judge,
         difficultyLevel: this.state.difficultyLevel,
-        tags: this.state.tag,
-        createdAt: moment(),
+        tags: updatedTags,
+        createdAt,
         star: 0
       });
     }
@@ -123,7 +123,7 @@ class ProblemForm extends React.Component{
           <input 
             type="text"
             placeholder='Tags with comma'
-            value={this.state.tag}
+            value={this.state.tags}
             onChange={this.onTagChange}
           />
           <button>Add Problem</button>

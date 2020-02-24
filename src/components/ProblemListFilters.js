@@ -51,6 +51,7 @@ class ProblemListFilters extends React.Component {
     }
   };
   onDatesChange = ({ startDate, endDate })=>{
+    console.log('this one',startDate, endDate);
     this.props.setStartDate(startDate);
     this.props.setEndDate(endDate);
   };

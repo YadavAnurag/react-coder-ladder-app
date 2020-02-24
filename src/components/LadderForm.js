@@ -10,7 +10,7 @@ class LadderForm extends React.Component{
     this.state = {
       ladderName: props.ladder ? props.ladder.ladderName : '',
       description: props.ladder ? props.ladder.description : '',
-      createdAt: props.ladder ? props.ladder.createdAt : moment(),
+      createdAt: props.ladder ? moment(props.ladder.createdAt) : moment(),
       problems: props.ladder ? props.ladder.problems : [],
       calanderFocused: false,
       error: ''
@@ -41,7 +41,7 @@ class LadderForm extends React.Component{
       this.props.onSubmit({
         ladderName: this.state.ladderName,
         description: this.state.description,
-        createdAt: this.state.createdAt,
+        createdAt: this.state.createdAt.valueOf(),
         problems: []
       });
     }

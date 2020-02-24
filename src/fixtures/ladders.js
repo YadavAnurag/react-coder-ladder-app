@@ -9,7 +9,7 @@ const problems1 = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0),
+    createdAt: moment(0).add(1, 'day').valueOf(),
     star: 8
   },
   {
@@ -19,7 +19,7 @@ const problems1 = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).add(1, 'day'),
+    createdAt: moment().add(1, 'day').valueOf(),
     star: 3
   },
   {
@@ -29,7 +29,7 @@ const problems1 = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).subtract(3, 'days'),
+    createdAt: moment().subtract(3, 'days').valueOf(),
     star: 7
   }
 ];
@@ -42,7 +42,7 @@ const problems2 = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).add(1, 'year'),
+    createdAt: moment().add(1, 'year').valueOf(),
     star: 2
   },
   {
@@ -52,7 +52,7 @@ const problems2 = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).add(2, 'year'),
+    createdAt: moment().add(1, 'year').valueOf(),
     star: 4
   },
   {
@@ -62,7 +62,7 @@ const problems2 = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).subtract(4, 'year'),
+    createdAt: moment().subtract(4, 'year').valueOf(),
     star: 0
   }
 ];
@@ -75,7 +75,7 @@ export const problems = [
     judge: 'codechef',
     difficultyLevel: 2,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0),
+    createdAt: moment().valueOf(),
     star: 5
   },
   {
@@ -85,7 +85,7 @@ export const problems = [
     judge: 'codeforces',
     difficultyLevel: 3,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).add(1, 'day'),
+    createdAt: moment(0).add(1, 'day').valueOf(),
     star: 7
   },
   {
@@ -95,7 +95,7 @@ export const problems = [
     judge: 'codeforces',
     difficultyLevel: 1,
     tags: ['stack', 'tree', 'array'],
-    createdAt: moment(0).subtract(3, 'days'),
+    createdAt: moment(0).subtract(3, 'days').valueOf(),
     star: 3
   }
 ];
@@ -105,7 +105,7 @@ export const ladders = [
     id: '11',
     ladderName: 'first ladder',
     description: 'this is first ladder',
-    createdAt: moment(0),
+    createdAt: moment().valueOf(),
     problems: [...problems1],
     star: 6
   },
@@ -113,7 +113,7 @@ export const ladders = [
     id: '12',
     ladderName: 'my second ladder',
     description: 'this is description about the second ladder',
-    createdAt: moment(0).add(1, 'minute'),
+    createdAt: moment().add(2, 'day').valueOf(),
     problems: [...problems2 ],
     star: 3
   }
